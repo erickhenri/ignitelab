@@ -32,13 +32,13 @@ export function Video(props: VideoProps) {
                 </div>
             </div>
 
-            <div className="p-8 max-w-[1100px] mx-auto">
-                <div className="flex items-start gap-16">
+            <div className="p-6 md:p-8 max-w-[1100px] mx-auto">
+                <div className="flex flex-col md:flex-row items-start gap-16">
                     <div className="flex-1">
-                        <h1 className="text-2xl font-bold">
+                        <h1 className="text-lg md:text-2xl font-bold">
                             {data.lesson.title}
                         </h1>
-                        <p className="mt-4 text-gray-200 leading-relaxed">
+                        <p className="mt-4 text-sm md:text-base text-gray-200 leading-relaxed">
                             {data.lesson.description}
                         </p>
 
@@ -51,7 +51,7 @@ export function Video(props: VideoProps) {
                                 />
 
                                 <div className="leading-relaxed">
-                                    <strong className='font-bold text-2xl block'>
+                                    <strong className='font-bold text-lg md:text-2xl block'>
                                         {data.lesson.teacher.name}
                                     </strong>
                                     <span className='text-gray-200 text-sm block'>
@@ -59,10 +59,10 @@ export function Video(props: VideoProps) {
                                     </span>
                                 </div>
                             </div>
-                       )}
+                        )}
                     </div>
 
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 w-full md:w-auto">
                         <a href="#" className="p-4 text-sm font-bold uppercase bg-green-500 flex items-center justify-center gap-2 rounded hover:bg-green-700 transition-colors">
                             <DiscordLogo size={24}/>
                             Comunidade do Discord
@@ -74,16 +74,16 @@ export function Video(props: VideoProps) {
                     </div>
                 </div>
 
-                <div className="gap-8 mt-20 grid grid-cols-2">
+                <div className="gap-8 mt-20 grid md:grid-cols-2">
                     <a href="" className='bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors'>
                         <div className='bg-green-700 h-full p-6 flex items-center'>
                             <FileArrowDown size={40}/>
                         </div>
                         <div className="py-6 leading-relaxed">
-                            <strong className='text-2xl mb-2'>
+                            <strong className='text-lg md:text-2xl mb-2'>
                                 Material Complementar
                             </strong>
-                            <p className='text-sm text-gray-200'>
+                            <p className='text-xs md:text-sm text-gray-200'>
                                 Acesse o material complementar para acelerar o seu desenvolvimento
                             </p>
                         </div>
@@ -96,10 +96,10 @@ export function Video(props: VideoProps) {
                             <Image size={40}/>
                         </div>
                         <div className="py-6 leading-relaxed">
-                            <strong className='text-2xl mb-2'>
+                            <strong className='text-lg md:text-2xl mb-2'>
                                 Wallpapers exclusivos
                             </strong>
-                            <p className='text-sm text-gray-200'>
+                            <p className='text-xs md:text-sm text-gray-200'>
                                 Baixe wallpapers exclusivos do Ignite Lab e personalize a sua máquina
                             </p>
                         </div>

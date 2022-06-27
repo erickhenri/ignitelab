@@ -1,11 +1,21 @@
+import classNames from "classnames";
+import { useState } from "react";
 import { useGetLessonsQuery } from "../graphql/genereted";
 import { Lesson } from "./Lesson";
 
-export function Sidebar() {
+interface SidebarProps {
+    sidebarOpen: boolean,
+    closeSidebar: () => void,
+}
+
+export function Sidebar(props :SidebarProps) {
     const { data } = useGetLessonsQuery()
 
     return (
-        <aside className="w-[21.75rem] bg-gray-700 p-6 border-l border-gray-600">
+        <aside className={classNames("absolute z-50 right-0 md:static h-full w-full md:w-[21.75rem] md:h-auto bg-gray-700 p-6 border-l border-gray-600 transition duration-500", {
+            "-top-full": !props.sidebarOpen,
+            "top-0": props.sidebarOpen,
+        })}>
             <span className="font-bold text-2xl pb-6 mb-6 border-b border-gray-500 block">
                 Cronograma de aulas
             </span>
@@ -18,6 +28,7 @@ export function Sidebar() {
                         slug={lesson.slug}
                         availableAt={new Date(lesson.availableAt)}
                         type={lesson.lessonType}
+                        closeSidebar={props.closeSidebar}
                     />
                 ))}
             </div>
