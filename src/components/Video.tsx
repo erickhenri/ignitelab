@@ -42,24 +42,26 @@ export function Video(props: VideoProps) {
                             {data.lesson.description}
                         </p>
 
-                       {data.lesson.teacher && (
-                            <div className="flex items-center gap-4 mt-6">
-                                <img 
-                                    className='h-16 w-16 rounded-full border-2 border-blue-500'
-                                    src={data.lesson.teacher.avatarURL}
-                                    alt=""
-                                />
+                       {data.lesson.teachers && 
+                            data.lesson.teachers.map((teacher, key) => (
+                                <div key={key} className="flex items-center gap-4 mt-6">
+                                    <img 
+                                        className='h-16 w-16 rounded-full border-2 border-blue-500'
+                                        src={teacher.avatarURL}
+                                        alt=""
+                                        />
 
-                                <div className="leading-relaxed">
-                                    <strong className='font-bold text-lg md:text-2xl block'>
-                                        {data.lesson.teacher.name}
-                                    </strong>
-                                    <span className='text-gray-200 text-sm block'>
-                                        {data.lesson.teacher.bio}
-                                    </span>
+                                    <div className="leading-relaxed">
+                                        <strong className='font-bold text-lg md:text-2xl block'>
+                                            {teacher.name}
+                                        </strong>
+                                        <span className='text-gray-200 text-sm block'>
+                                            {teacher.bio}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            ))
+                        }
                     </div>
 
                     <div className="flex flex-col gap-4 w-full md:w-auto">

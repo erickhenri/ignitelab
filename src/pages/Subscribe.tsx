@@ -31,10 +31,10 @@ export function Subscribe() {
                     <Logo />
 
                     <h1 className='mt-6 md:mt-8 text-3xl text-center md:text-left md:text-[2.5rem] leading-tight'>
-                        Construa uma <strong className='text-blue-500'>aplicação completa</strong>, do zero, com <strong className='text-blue-500'>React</strong>
+                        Um conteúdo completo que irá fazer você subir de nível com <strong className='text-blue-500'>React</strong>
                     </h1>
                     <p className='mt-6 md:mt-4 text-center md:text-left text-gray-200 leading-relaxed'>
-                        Em apenas uma semana você vai dominar na prática uma das tecnologias mais utilizadas e com
+                        Você vai dominar na prática uma das tecnologias mais utilizadas e com
                         alta demanda para acessar as melhores oportunidades do mercado.
                     </p>
                 </div>

@@ -1246,7 +1246,7 @@ export type Lesson = Node & {
   slug: Scalars['String'];
   /** System stage field */
   stage: Stage;
-  teacher?: Maybe<Teacher>;
+  teachers: Array<Teacher>;
   title: Scalars['String'];
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
@@ -1297,8 +1297,14 @@ export type LessonScheduledInArgs = {
 };
 
 
-export type LessonTeacherArgs = {
+export type LessonTeachersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TeacherWhereInput>;
 };
 
 
@@ -1330,7 +1336,7 @@ export type LessonCreateInput = {
   description?: InputMaybe<Scalars['String']>;
   lessonType: LessonType;
   slug: Scalars['String'];
-  teacher?: InputMaybe<TeacherCreateOneInlineInput>;
+  teachers?: InputMaybe<TeacherCreateManyInlineInput>;
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   videoId: Scalars['String'];
@@ -1484,7 +1490,9 @@ export type LessonManyWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars['String']>;
-  teacher?: InputMaybe<TeacherWhereInput>;
+  teachers_every?: InputMaybe<TeacherWhereInput>;
+  teachers_none?: InputMaybe<TeacherWhereInput>;
+  teachers_some?: InputMaybe<TeacherWhereInput>;
   title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1575,7 +1583,7 @@ export type LessonUpdateInput = {
   description?: InputMaybe<Scalars['String']>;
   lessonType?: InputMaybe<LessonType>;
   slug?: InputMaybe<Scalars['String']>;
-  teacher?: InputMaybe<TeacherUpdateOneInlineInput>;
+  teachers?: InputMaybe<TeacherUpdateManyInlineInput>;
   title?: InputMaybe<Scalars['String']>;
   videoId?: InputMaybe<Scalars['String']>;
 };
@@ -1773,7 +1781,9 @@ export type LessonWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars['String']>;
-  teacher?: InputMaybe<TeacherWhereInput>;
+  teachers_every?: InputMaybe<TeacherWhereInput>;
+  teachers_none?: InputMaybe<TeacherWhereInput>;
+  teachers_some?: InputMaybe<TeacherWhereInput>;
   title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']>;
@@ -4608,7 +4618,7 @@ export type Teacher = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  lessons: Array<Lesson>;
+  lessons: Array<TeacherLessons>;
   name: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -4649,9 +4659,7 @@ export type TeacherLessonsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<LessonOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<LessonWhereInput>;
 };
 
 
@@ -4696,7 +4704,7 @@ export type TeacherCreateInput = {
   avatarURL: Scalars['String'];
   bio: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  lessons?: InputMaybe<LessonCreateManyInlineInput>;
+  lessons?: InputMaybe<TeacherLessonsCreateManyInlineInput>;
   name: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -4722,6 +4730,86 @@ export type TeacherEdge = {
   cursor: Scalars['String'];
   /** The item at the end of the edge. */
   node: Teacher;
+};
+
+export type TeacherLessons = Lesson;
+
+export type TeacherLessonsConnectInput = {
+  Lesson?: InputMaybe<LessonConnectInput>;
+};
+
+export type TeacherLessonsCreateInput = {
+  Lesson?: InputMaybe<LessonCreateInput>;
+};
+
+export type TeacherLessonsCreateManyInlineInput = {
+  /** Connect multiple existing TeacherLessons documents */
+  connect?: InputMaybe<Array<TeacherLessonsWhereUniqueInput>>;
+  /** Create and connect multiple existing TeacherLessons documents */
+  create?: InputMaybe<Array<TeacherLessonsCreateInput>>;
+};
+
+export type TeacherLessonsCreateOneInlineInput = {
+  /** Connect one existing TeacherLessons document */
+  connect?: InputMaybe<TeacherLessonsWhereUniqueInput>;
+  /** Create and connect one TeacherLessons document */
+  create?: InputMaybe<TeacherLessonsCreateInput>;
+};
+
+export type TeacherLessonsUpdateInput = {
+  Lesson?: InputMaybe<LessonUpdateInput>;
+};
+
+export type TeacherLessonsUpdateManyInlineInput = {
+  /** Connect multiple existing TeacherLessons documents */
+  connect?: InputMaybe<Array<TeacherLessonsConnectInput>>;
+  /** Create and connect multiple TeacherLessons documents */
+  create?: InputMaybe<Array<TeacherLessonsCreateInput>>;
+  /** Delete multiple TeacherLessons documents */
+  delete?: InputMaybe<Array<TeacherLessonsWhereUniqueInput>>;
+  /** Disconnect multiple TeacherLessons documents */
+  disconnect?: InputMaybe<Array<TeacherLessonsWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing TeacherLessons documents */
+  set?: InputMaybe<Array<TeacherLessonsWhereUniqueInput>>;
+  /** Update multiple TeacherLessons documents */
+  update?: InputMaybe<Array<TeacherLessonsUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple TeacherLessons documents */
+  upsert?: InputMaybe<Array<TeacherLessonsUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type TeacherLessonsUpdateManyWithNestedWhereInput = {
+  Lesson?: InputMaybe<LessonUpdateManyWithNestedWhereInput>;
+};
+
+export type TeacherLessonsUpdateOneInlineInput = {
+  /** Connect existing TeacherLessons document */
+  connect?: InputMaybe<TeacherLessonsWhereUniqueInput>;
+  /** Create and connect one TeacherLessons document */
+  create?: InputMaybe<TeacherLessonsCreateInput>;
+  /** Delete currently connected TeacherLessons document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected TeacherLessons document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single TeacherLessons document */
+  update?: InputMaybe<TeacherLessonsUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single TeacherLessons document */
+  upsert?: InputMaybe<TeacherLessonsUpsertWithNestedWhereUniqueInput>;
+};
+
+export type TeacherLessonsUpdateWithNestedWhereUniqueInput = {
+  Lesson?: InputMaybe<LessonUpdateWithNestedWhereUniqueInput>;
+};
+
+export type TeacherLessonsUpsertWithNestedWhereUniqueInput = {
+  Lesson?: InputMaybe<LessonUpsertWithNestedWhereUniqueInput>;
+};
+
+export type TeacherLessonsWhereInput = {
+  Lesson?: InputMaybe<LessonWhereInput>;
+};
+
+export type TeacherLessonsWhereUniqueInput = {
+  Lesson?: InputMaybe<LessonWhereUniqueInput>;
 };
 
 /** Identifies documents */
@@ -4807,9 +4895,6 @@ export type TeacherManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  lessons_every?: InputMaybe<LessonWhereInput>;
-  lessons_none?: InputMaybe<LessonWhereInput>;
-  lessons_some?: InputMaybe<LessonWhereInput>;
   name?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   name_contains?: InputMaybe<Scalars['String']>;
@@ -4886,7 +4971,7 @@ export enum TeacherOrderByInput {
 export type TeacherUpdateInput = {
   avatarURL?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
-  lessons?: InputMaybe<LessonUpdateManyInlineInput>;
+  lessons?: InputMaybe<TeacherLessonsUpdateManyInlineInput>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -5039,9 +5124,6 @@ export type TeacherWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  lessons_every?: InputMaybe<LessonWhereInput>;
-  lessons_none?: InputMaybe<LessonWhereInput>;
-  lessons_some?: InputMaybe<LessonWhereInput>;
   name?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   name_contains?: InputMaybe<Scalars['String']>;
@@ -5581,7 +5663,7 @@ export type GetLessonBySlugQueryVariables = Exact<{
 }>;
 
 
-export type GetLessonBySlugQuery = { __typename?: 'Query', lesson?: { __typename?: 'Lesson', title: string, videoId: string, description?: string | null, teacher?: { __typename?: 'Teacher', avatarURL: string, bio: string, name: string } | null } | null };
+export type GetLessonBySlugQuery = { __typename?: 'Query', lesson?: { __typename?: 'Lesson', title: string, videoId: string, description?: string | null, teachers: Array<{ __typename?: 'Teacher', avatarURL: string, bio: string, name: string }> } | null };
 
 export type GetLessonsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5629,7 +5711,7 @@ export const GetLessonBySlugDocument = gql`
     title
     videoId
     description
-    teacher {
+    teachers {
       avatarURL
       bio
       name
