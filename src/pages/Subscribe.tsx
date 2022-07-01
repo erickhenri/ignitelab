@@ -40,7 +40,7 @@ export function Subscribe() {
                 </div>
 
                 <div className="px-6 py-8 md:p-8 w-full md:w-auto bg-gray-700 border border-gray-500 rounded">
-                    <strong className='text-lg md:text-2xl mb-6 block'>Insceva-se gratuitamente</strong>
+                    <strong className='text-lg md:text-2xl mb-6 block'>Inscreva-se gratuitamente</strong>
 
                     <form onSubmit={handleSubscribe} className='flex flex-col gap-2 w-full'>
                         <input 
